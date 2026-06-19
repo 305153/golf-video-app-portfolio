@@ -1,0 +1,311 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5; /* ログイン後の画面背景 */
+}
+
+.main-content {
+  flex: 1;
+  padding: 30px;
+  padding-bottom: calc(30px + env(safe-area-inset-bottom));
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ===== Admin layout (improves UX for wide screens) ===== */
+.admin-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 20px;
+}
+
+.admin-sidebar {
+  position: sticky;
+  top: calc(56px + env(safe-area-inset-top) + 8px);
+  align-self: start;
+  max-height: calc(100dvh - 56px - env(safe-area-inset-top) - 24px);
+  overflow: auto;
+}
+
+.admin-content {
+  min-height: 60vh;
+}
+
+.admin-placeholder {
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  color: #666;
+}
+
+.admin-tabs {
+  display: none;
+}
+
+.admin-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.admin-folder-title {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.primary-btn {
+  padding: 10px 16px;
+  background: #333;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-dialog {
+  width: min(720px, 92vw);
+  max-height: 90dvh;
+  overflow: auto;
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 18px;
+  color: #666;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .main-content {
+    padding: 25px;
+  }
+  
+  .container {
+    max-width: 100%;
+  }
+  .admin-layout {
+    grid-template-columns: 260px 1fr;
+  }
+}
+
+.user-folder-info {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.user-folder-info h2 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+}
+
+.user-folder-info p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.no-folder-error {
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.no-folder-error h2 {
+  margin: 0 0 1rem 0;
+  color: #721c24;
+}
+
+.no-folder-error p {
+  margin: 0;
+  color: #721c24;
+}
+
+.admin-info {
+  background: #e8f5e8;
+  border: 1px solid #c8e6c9;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.admin-info h2 {
+  margin: 0 0 0.5rem 0;
+  color: #2e7d32;
+}
+
+.admin-info p {
+  margin: 0;
+  color: #2e7d32;
+  font-size: 0.9rem;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 15px 10px;
+  }
+  .admin-layout {
+    display: block;
+  }
+  .admin-tabs {
+    position: sticky;
+    top: calc(52px + env(safe-area-inset-top));
+    z-index: 5;
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    background: transparent;
+  }
+  .admin-tab-btn {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #e1e5e9;
+    background: #fff;
+    color: #333;
+  }
+  .admin-tab-btn.active {
+    border-color: #007bff;
+    box-shadow: 0 1px 6px rgba(0, 123, 255, 0.15);
+  }
+  .hidden-mobile {
+    display: none;
+  }
+  
+  .user-folder-info {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .user-folder-info h2 {
+    font-size: 1.1rem;
+  }
+  
+  .user-folder-info p {
+    font-size: 0.8rem;
+  }
+  
+  .no-folder-error {
+    padding: 1.5rem;
+  }
+  
+  .no-folder-error h2 {
+    font-size: 1.1rem;
+  }
+  
+  .admin-info {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .admin-info h2 {
+    font-size: 1.1rem;
+  }
+  
+  .admin-info p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 10px 8px;
+  }
+  
+  .user-folder-info {
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .user-folder-info h2 {
+    font-size: 1rem;
+  }
+  
+  .user-folder-info p {
+    font-size: 0.75rem;
+    word-break: break-all;
+  }
+  
+  .no-folder-error {
+    padding: 1rem;
+  }
+  
+  .no-folder-error h2 {
+    font-size: 1rem;
+  }
+  
+  .no-folder-error p {
+    font-size: 0.85rem;
+  }
+  
+  .admin-info {
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .admin-info h2 {
+    font-size: 1rem;
+  }
+  
+  .admin-info p {
+    font-size: 0.75rem;
+  }
+}
